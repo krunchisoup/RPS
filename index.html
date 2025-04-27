@@ -7,12 +7,53 @@
 </head>
 
 <body>
-
     <script>
-
+    
         console.log("Hello!")
+    
+    function getComputerChoice() {
+        let numgen = Math.random()
+        let computerChoice = ""
+        if (numgen <= 0.33) {
+            computerChoice = "Rock"
+        }
+        if (numgen > 0.33 && numgen <= 0.66) {
+            computerChoice = "Scissors"
+        }
+        if (numgen > 0.66) {
+            computerChoice = "Paper"
+        }
+        console.log(numgen)
+        return computerChoice
+    }
+    console.log(getComputerChoice())
+    
 
-    </script>
+
+    function getPlayerChoice(){
+        let playerChoice = prompt("Please enter: Rock, Paper or Scissors....")
+                    while(playerChoice != "Rock" && playerChoice != "rock" && playerChoice != "Paper" && playerChoice != "paper" && playerChoice != "Scissors" && playerChoice != "scissors"){
+                    playerChoice = prompt("Please enter: Rock, Paper or Scissors....")
+                }
+                return playerChoice
+            }
+
+    
+
+    console.log(getPlayerChoice())
+
+    let compScore = 0
+    let playScore = 0
+
+
+    function playRound(humanChoice, compChoice){
+        console.log(humanChoice+compChoice)
+
+    }
+
+    playRound(getComputerChoice(),getPlayerChoice())
+
+        </script>
 
 
 </body>
