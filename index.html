@@ -23,35 +23,94 @@
         if (numgen > 0.66) {
             computerChoice = "Paper"
         }
-        console.log(numgen)
-        return computerChoice
+        return computerChoice.toUpperCase()
     }
-    console.log(getComputerChoice())
     
-
 
     function getPlayerChoice(){
         let playerChoice = prompt("Please enter: Rock, Paper or Scissors....")
-                    while(playerChoice != "Rock" && playerChoice != "rock" && playerChoice != "Paper" && playerChoice != "paper" && playerChoice != "Scissors" && playerChoice != "scissors"){
+                    while(playerChoice.toUpperCase() != "ROCK" && playerChoice.toUpperCase() != "PAPER" && playerChoice.toUpperCase() != "SCISSORS"){
                     playerChoice = prompt("Please enter: Rock, Paper or Scissors....")
                 }
-                return playerChoice
+                return playerChoice.toLocaleUpperCase()
             }
 
-    
-
-    console.log(getPlayerChoice())
 
     let compScore = 0
     let playScore = 0
 
 
-    function playRound(humanChoice, compChoice){
-        console.log(humanChoice+compChoice)
+            function playRound(playChoice, compChoice){
+                console.log("Computer picks: " + compChoice)
+                console.log("Player picks: " + playChoice)
+                if (playChoice == "ROCK"){
+                    if (compChoice == "PAPER"){
+                        console.log("Computer wins!")
+                        return compScore += +1
+                    }
+                    if (compChoice == "SCISSORS"){
+                        console.log("Player wins!")
+                        return playScore += +1
+                    }
+                    if (compChoice == "ROCK"){
+                        console.log("Draw!")
+                        return 0
+                    }
+                }
+                if (playChoice == "PAPER"){
+                    if (compChoice == "ROCK"){
+                        console.log("Player wins!")
+                        return playScore += +1
+                    }
+                    if (compChoice == "SCISSORS"){
+                        console.log("Computer wins!")
+                        return compScore += +1
+                    }
+                    if (compChoice == "PAPER"){
+                        console.log("Draw!")
+                        return 0
+                    }
+                }
+                if (playChoice == "SCISSORS"){
+                    if (compChoice == "ROCK"){
+                        console.log("Computer wins!")
+                        return compScore += +1
+                    }
+                    if (compChoice == "PAPER"){
+                        console.log("Player wins!")
+                        return playScore += +1
+                    }
+                    if (compChoice == "SCISSORS"){
+                        console.log("Draw!")
+                        return 0
+                    }
+                }
+            }
 
-    }
 
-    playRound(getComputerChoice(),getPlayerChoice())
+        function playGame(){
+            playRound(getPlayerChoice(),getComputerChoice())
+            console.log("Player score: " + playScore + " | Computer score: " + compScore)
+            playRound(getPlayerChoice(),getComputerChoice())
+            console.log("Player score: " + playScore + " | Computer score: " + compScore)
+            playRound(getPlayerChoice(),getComputerChoice())
+            console.log("Player score: " + playScore + " | Computer score: " + compScore)
+            playRound(getPlayerChoice(),getComputerChoice())
+            console.log("Player score: " + playScore + " | Computer score: " + compScore)
+            playRound(getPlayerChoice(),getComputerChoice())
+            console.log("Player score: " + playScore + " | Computer score: " + compScore)
+            if(compScore > playScore){
+                console.log("Computer wins! Sorry :(")
+            }
+            if (compScore < playScore){
+                console.log("Player wins! Yay! :)")
+            }
+            if(compScore == playScore){
+                console.log("Draw!")
+            }
+        }
+
+        playGame()
 
         </script>
 
