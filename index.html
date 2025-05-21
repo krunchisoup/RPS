@@ -1,5 +1,12 @@
 <!DOCTYPE html>
-<html lang = "eng">
+<html lang="eng">
+
+<style>
+    p{
+        color: blueviolet;
+    }
+</style>
+
 
 <head>
     <meta charset="UTF-8">
@@ -7,120 +14,180 @@
 </head>
 
 <body>
+    <div class = 'display'>
+        <div class  = 'results'></div>
+        <button><a href="./index.html">Restart</a></button>
+    </div>
     <script>
-    
+
         console.log("Hello!")
-    
-    function getComputerChoice() {
-        let numgen = Math.random()
-        let computerChoice = ""
-        if (numgen <= 0.33) {
-            computerChoice = "Rock"
-        }
-        if (numgen > 0.33 && numgen <= 0.66) {
-            computerChoice = "Scissors"
-        }
-        if (numgen > 0.66) {
-            computerChoice = "Paper"
-        }
-        return computerChoice.toUpperCase()
-    }
-    
 
-    function getPlayerChoice(){
-        let playerChoice = prompt("Please enter: Rock, Paper or Scissors....")
-                    while(playerChoice.toUpperCase() != "ROCK" && playerChoice.toUpperCase() != "PAPER" && playerChoice.toUpperCase() != "SCISSORS"){
-                    playerChoice = prompt("Please enter: Rock, Paper or Scissors....")
-                }
-                return playerChoice.toLocaleUpperCase()
+        function getComputerChoice() {
+            let numgen = Math.random()
+            let computerChoice = ""
+            if (numgen <= 0.33) {
+                computerChoice = "Rock"
             }
+            if (numgen > 0.33 && numgen <= 0.66) {
+                computerChoice = "Scissors"
+            }
+            if (numgen > 0.66) {
+                computerChoice = "Paper"
+            }
+            return computerChoice.toUpperCase()
+        }
 
+        function getPlayerChoice() {
+            let playerChoice = prompt("Please enter: Rock, Paper or Scissors....")
+            while (playerChoice.toUpperCase() != "ROCK" && playerChoice.toUpperCase() != "PAPER" && playerChoice.toUpperCase() != "SCISSORS") {
+                playerChoice = prompt("Please enter: Rock, Paper or Scissors....")
+            }
+            return playerChoice.toLocaleUpperCase()
+        }
 
-    let compScore = 0
-    let playScore = 0
+        let compScore = 0
+        let playScore = 0
 
+        function playRound(playChoice, compChoice) {
+            const div = document.querySelector('div');
+            const cPicks = document.createElement('p');
+            const pPicks = document.createElement('p');
+            cPicks.textContent = "Computer picks: " + compChoice;
+            pPicks.textContent = "Player picks: " + playChoice;
+            div.appendChild(cPicks);
+            div.appendChild(pPicks);
 
-            function playRound(playChoice, compChoice){
-                console.log("Computer picks: " + compChoice)
-                console.log("Player picks: " + playChoice)
-                if (playChoice == "ROCK"){
-                    if (compChoice == "PAPER"){
-                        console.log("Computer wins!")
-                        return compScore += +1
-                    }
-                    if (compChoice == "SCISSORS"){
-                        console.log("Player wins!")
-                        return playScore += +1
-                    }
-                    if (compChoice == "ROCK"){
-                        console.log("Draw!")
-                        return 0
-                    }
+            const winner = document.createElement('p');
+            
+
+            console.log("Computer picks: " + compChoice)
+            console.log("Player picks: " + playChoice)
+
+            if (playChoice == "ROCK") {
+                if (compChoice == "PAPER") {
+                    compScore += +1
+                    winner.textContent = "Computer wins! Player Score: " + playScore + " Computer Score: " + compScore;
+                    div.appendChild(winner);
+                    console.log("Computer wins!")
+                    return compScore
                 }
-                if (playChoice == "PAPER"){
-                    if (compChoice == "ROCK"){
-                        console.log("Player wins!")
-                        return playScore += +1
-                    }
-                    if (compChoice == "SCISSORS"){
-                        console.log("Computer wins!")
-                        return compScore += +1
-                    }
-                    if (compChoice == "PAPER"){
-                        console.log("Draw!")
-                        return 0
-                    }
+                if (compChoice == "SCISSORS") {
+                    playScore += +1
+                    winner.textContent = "Player wins! Player Score: " + playScore + " Computer Score: " + compScore;
+                    div.appendChild(winner);
+                    console.log("Player wins!")
+                    return playScore
                 }
-                if (playChoice == "SCISSORS"){
-                    if (compChoice == "ROCK"){
-                        console.log("Computer wins!")
-                        return compScore += +1
-                    }
-                    if (compChoice == "PAPER"){
-                        console.log("Player wins!")
-                        return playScore += +1
-                    }
-                    if (compChoice == "SCISSORS"){
-                        console.log("Draw!")
-                        return 0
-                    }
+                if (compChoice == "ROCK") {
+                    winner.textContent = "Draw! Player Choice: " + playScore + " Computer Choice: " + compScore;
+                    div.appendChild(winner);
+                    console.log("Draw!")
+                    return 0
                 }
             }
 
+            if (playChoice == "PAPER") {
+                if (compChoice == "ROCK") {
+                    playScore += +1
+                    winner.textContent = "Player wins! Player Score: " + playScore + " Computer Score: " + compScore;
+                    div.appendChild(winner);
+                    console.log("Player wins!")
+                    return playScore
+                }
+                if (compChoice == "SCISSORS") {
+                    compScore += +1;
+                    winner.textContent = "Computer wins! Player Score: " + playScore + " Computer Score: " + compScore;
+                    div.appendChild(winner);
+                    console.log("Computer wins!");
+                    return compScore;
+                }
+                if (compChoice == "PAPER") {
+                    winner.textContent = "Draw! Player Choice: " + playScore + " Computer Choice: " + compScore;
+                    div.appendChild(winner);
+                    console.log("Draw!")
+                    return 0
+                }
+            }
 
-        function playGame(){
-            playRound(getPlayerChoice(),getComputerChoice())
-            console.log("Player score: " + playScore + " | Computer score: " + compScore)
-            playRound(getPlayerChoice(),getComputerChoice())
-            console.log("Player score: " + playScore + " | Computer score: " + compScore)
-            playRound(getPlayerChoice(),getComputerChoice())
-            console.log("Player score: " + playScore + " | Computer score: " + compScore)
-            playRound(getPlayerChoice(),getComputerChoice())
-            console.log("Player score: " + playScore + " | Computer score: " + compScore)
-            playRound(getPlayerChoice(),getComputerChoice())
-            console.log("Player score: " + playScore + " | Computer score: " + compScore)
-            if(compScore > playScore){
-                console.log("Computer wins! Sorry :(")
-            }
-            if (compScore < playScore){
-                console.log("Player wins! Yay! :)")
-            }
-            if(compScore == playScore){
-                console.log("Draw!")
+            if (playChoice == "SCISSORS") {
+                if (compChoice == "ROCK") {
+                    compScore += +1
+                    winner.textContent = "Computer wins! Player Score: " + playScore + " Computer Score: " + compScore;
+                    div.appendChild(winner);
+                    console.log("Computer wins!")
+                    return compScore;
+                }
+                if (compChoice == "PAPER") {
+                    playScore += +1
+                    winner.textContent = "Player wins! Player Score: " + playScore + " Computer Score: " + compScore;
+                    div.appendChild(winner);
+                    console.log("Player wins!")
+                    return playScore
+                }
+                if (compChoice == "SCISSORS") {
+                    winner.textContent = "Draw! Player Choice: " + playScore + " Computer Choice: " + compScore;
+                    div.appendChild(winner);
+                    console.log("Draw!")
+                    return 0
+                }
             }
         }
 
-        playGame()
+        function playGame() {
 
-        </script>
+            const winner = document.createElement('p');
+            const div = document.createElement('div');
+            const results = document.querySelector('div');
+            results.appendChild(div);
 
+            if(compScore == 5 || playScore == 5){
+            if (compScore > playScore) {
+                winner.textContent = "Computer wins! Sorry :(";
+                div.appendChild(winner);
+                console.log("Computer wins! Sorry :(");
+            }
+            if (compScore < playScore) {
+                winner.textContent = "Player wins! Yay! :)";
+                div.appendChild(winner);
+                console.log("Player wins! Yay! :)");
+            }
+            if (compScore == playScore) {
+                winner.textContent = "Draw!";
+                div.appendChild(winner);
+                console.log("Draw!");
+            }
+        }
+        }
 
+        const display = document.querySelector('div');
+        const rockButton = document.createElement('button');
+        rockButton.textContent = 'Rock';
+        const paperButton = document.createElement('button');
+        paperButton.textContent = 'Paper';
+        const scissorsButton = document.createElement('button');
+        scissorsButton.textContent = 'Scissors';
+        display.appendChild(rockButton);
+        display.appendChild(paperButton);
+        display.appendChild(scissorsButton);
+
+        rockButton.addEventListener("click", () => {
+            playChoice = "ROCK";
+            playRound(playChoice, getComputerChoice());
+            playGame();
+        });
+
+        paperButton.addEventListener("click", () => {
+            playChoice = "PAPER";
+            playRound(playChoice, getComputerChoice());
+            playGame();
+        });
+
+        scissorsButton.addEventListener("click", () => {
+            playChoice = "SCISSORS";
+            playRound(playChoice, getComputerChoice());
+            playGame();
+        })
+    </script>
 </body>
-
-
-
-
-
-
 
 </html>
